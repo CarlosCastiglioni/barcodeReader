@@ -5,26 +5,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class QRCodeController extends ChangeNotifier {
   List<String> tickets = [];
+  int addCount = 0;
+  int excludeCount = 0;
 
-  void readQRCode() async {
-    String code = await FlutterBarcodeScanner.scanBarcode(
-      "#FFFFFF",
-      "Cancelar",
-      false,
-      ScanMode.QR,
-    );
-    if (!tickets.contains(code.toString()) && code != '-1') {
-      tickets.add(code.toString());
-      BotToast.showText(text: "Code added successfully!!");
-      if (code.contains("http") || code.contains("https")) {
-        String url = code.toString();
-        await launchUrl(Uri.parse(url));
-      }
-    }
-    notifyListeners();
-  }
-
-  void readBarCode() async {
+  void readCode() async {
+    addCount++;
     String code = await FlutterBarcodeScanner.scanBarcode(
       "#FFFFFF",
       "Cancelar",
@@ -43,8 +28,8 @@ class QRCodeController extends ChangeNotifier {
   }
 
   void ticketExclude(index) async {
+    excludeCount++;
     tickets.remove(index);
-    BotToast.showText(text: "Code excluded successfully!!");
     notifyListeners();
   }
 }

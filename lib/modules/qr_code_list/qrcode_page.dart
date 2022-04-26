@@ -1,4 +1,5 @@
 import 'package:bar_code_reader/modules/qr_code_list/qrcode_controller.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,8 @@ class _QRCodePageState extends State<QRCodePage> {
                     leading: ElevatedButton(
                         onPressed: () {
                           controller.ticketExclude(ticket[tick]);
+                          BotToast.showText(
+                              text: "Code excluded successfully!!");
                         },
                         child: const Icon(Icons.delete)),
                   );
@@ -43,16 +46,10 @@ class _QRCodePageState extends State<QRCodePage> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ElevatedButton(
-            onPressed: controller.readQRCode,
-            child: const Text("Read QRCode"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: controller.readBarCode,
-            child: const Text("Read Barcode"),
+          ElevatedButton.icon(
+            onPressed: controller.readCode,
+            label: const Text("Read Code"),
+            icon: const Icon(Icons.qr_code),
           ),
         ],
       ),
