@@ -29,7 +29,6 @@ class _QRCodePageState extends State<QRCodePage> {
                   return ListTile(
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12))),
-                    // leading: Image.asset(languages[language].icon),
                     title: Text(ticket[tick]),
                     leading: ElevatedButton(
                         onPressed: () {
