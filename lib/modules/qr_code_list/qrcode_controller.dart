@@ -12,7 +12,7 @@ class QRCodeController extends ChangeNotifier {
     addCount++;
     String code = await FlutterBarcodeScanner.scanBarcode(
       "#FFFFFF",
-      "Cancelar",
+      "Cancel",
       false,
       ScanMode.BARCODE,
     );
