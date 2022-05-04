@@ -24,6 +24,8 @@ class QRCodeController extends ChangeNotifier {
           String url = code.toString();
           await launchUrl(Uri.parse(url));
         }
+      } else if (tickets.contains(code.toString())) {
+        BotToast.showText(text: "Code already existis!!");
       }
       notifyListeners();
     } catch (e) {
