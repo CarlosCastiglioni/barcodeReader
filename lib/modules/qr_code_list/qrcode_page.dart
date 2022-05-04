@@ -42,15 +42,10 @@ class _QRCodePageState extends State<QRCodePage> {
                 separatorBuilder: (_, __) => const Divider(),
                 itemCount: controller.tickets.length));
       }),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ElevatedButton.icon(
-            onPressed: controller.readCode,
-            label: const Text("Read Code"),
-            icon: const Icon(Icons.qr_code),
-          ),
-        ],
+      floatingActionButton: ElevatedButton.icon(
+        onPressed: controller.readCode,
+        label: const Text("Read Code"),
+        icon: const Icon(Icons.qr_code),
       ),
     );
   }

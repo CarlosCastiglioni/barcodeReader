@@ -9,22 +9,26 @@ class QRCodeController extends ChangeNotifier {
   int excludeCount = 0;
 
   void readCode() async {
-    addCount++;
-    String code = await FlutterBarcodeScanner.scanBarcode(
-      "#FFFFFF",
-      "Cancel",
-      false,
-      ScanMode.BARCODE,
-    );
-    if (!tickets.contains(code.toString()) && code != '-1') {
-      tickets.add(code.toString());
-      BotToast.showText(text: "Code added successfully!!");
-      if (code.contains("http") || code.contains("https")) {
-        String url = code.toString();
-        await launchUrl(Uri.parse(url));
+    try {
+      addCount++;
+      String code = await FlutterBarcodeScanner.scanBarcode(
+        "#FFFFFF",
+        "Cancel",
+        false,
+        ScanMode.BARCODE,
+      );
+      if (!tickets.contains(code.toString()) && code != '-1') {
+        tickets.add(code.toString());
+        BotToast.showText(text: "Code added successfully!!");
+        if (code.contains("http") || code.contains("https")) {
+          String url = code.toString();
+          await launchUrl(Uri.parse(url));
+        }
       }
+      notifyListeners();
+    } catch (e) {
+      BotToast.showText(text: "Error");
     }
-    notifyListeners();
   }
 
   void ticketExclude(index) async {
